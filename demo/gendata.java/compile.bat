@@ -1,0 +1,1 @@
+javac -J-Duser.language=en GenJson.java

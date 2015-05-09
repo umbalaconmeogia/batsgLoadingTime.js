@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="content-language" name="Language" content="en-US" />
+  <link rel="stylesheet" href="css/batsg.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/batsgLoadingTime.js"></script>
+  <script type="text/javascript">
+    // Usage of BatsgLoadingTime with multipleStop = true.
+    var batsgLoadingTime = new BatsgLoadingTime();
+    batsgLoadingTime.multipleStop = true;
+
+    function displayTime(message) {
+      var message = message + batsgLoadingTime.getTimeSeconds() + " seconds.";
+      window.console && console.log(message);
+      $('#batsgLoadingTimeMessage').append(message + '<br />');
+    }
+    
+    // Load JSON data and append to the table.
+    function loadData(dataFile) {
+      $('#batsgLoadingTimeMessage').empty();
+      $('#table-body').empty();
+      batsgLoadingTime.start();
+      $.ajax({
+        url: dataFile,
+        dataType: 'json',
+        success: function(json) {
+          batsgLoadingTime.stop(function() {
+            displayTime("Time from start to load JSON: ");
+            loadDom(json);
+          });
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert(textStatus);
+        }
+      });
+    }
+    
+    function loadDom(json) {
+      $('#row-num').text(Object.keys(json).length);
+      var table = '';
+      var header = null;
+      var rowCount = 0;
+      for (var row in json) {
+        if (header == null) {
+          header = '<td></td>';
+          for (col in json[row]) {
+            header += '<th>' + col + '</th>';
+          }
+          table += '<tr>' + header + '</tr>';
+        }
+        var rowData = '<td>' + row + '</td>';
+        for (col in json[row]) {
+          var text = json[row][col];
+          rowData += '<td><div title="' + text + '">' + text + '</div></td>';
+        }
+        table += '<tr>' + rowData + '</tr>';
+        rowCount++;
+        if (rowCount == 1000) {
+          $('#table-body').append(table);
+          table = '';
+          rowCount = 0;
+        }
+      }
+      if (table) {
+        $('#table-body').append(table);
+      }
+      batsgLoadingTime.stop(function() {
+        displayTime("Time from start to load DOM: ");
+      });
+    }
+  </script>
+</head>
+<body>
+<h1><span id="row-num">1000</span> rows by JSON</h1>
+<input type="button" value="1000" onclick="loadData('data1000.json');" /><br />
+<input type="button" value="5000" onclick="loadData('data5000.json');" /><br />
+<input type="button" value="10000" onclick="loadData('data10000.json');" /><br />
+<div class="table-wrapper">
+  <table class="show-border">
+    <tbody id="table-body">
+    </tbody>
+  </table>
+</div>
+<div id="batsgLoadingTimeMessage"></div>
+</body>
+</html>

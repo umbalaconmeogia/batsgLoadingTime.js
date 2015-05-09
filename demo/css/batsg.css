@@ -1,0 +1,178 @@
+@CHARSET "utf8";
+html, body {
+  height: 100%;
+}
+table, th, td, table.layout td {
+  margin-bottom: 0;
+  padding: 0;
+  vertical-align: top;
+  text-align: left;
+}
+table.fixed {
+  table-layout: fixed;
+}
+table.auto {
+  width: auto;
+}
+table.auto td {
+  vertical-align: middle;
+}
+table.show-border {
+  border-collapse: collapse;
+}
+table.show-border th, table.show-border td, td.show-border {
+  border: 1px solid black;
+}
+table.no-border td, tr.no-border td {
+  border-width: 0;
+}
+td.middle {
+  text-align: center;
+  vertical-align: middle;
+}
+.full {
+  width: 100%;
+}
+.half {
+  width: 50%;
+}
+.scrollable {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.page-break { /* To make page break */
+  page-break-after: always;
+}
+.nobreak { /* Never break a phrase */
+  white-space: nowrap;
+}
+/* Header element for a scrollable element should be right padded 17px,
+to align to the scrollable (which has 17px for vertical scrollbar). */
+.scrollable-header {
+  padding-right: 17px;
+}
+/* Make all child element become ellipsis */
+.ellipsis * {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ime-full, .ime-full input, .ime-full textarea { /* Always turn on IME when get focus */
+  ime-mode: active;
+}
+.ime-half, .ime-half input, .ime-half textarea { /* Always turn off IME when get focus */
+  ime-mode: inactive;
+}
+.ime-half-only, .ime-half-only input, .ime-half-only textarea { /* Do not allow IME on when get focus */
+  ime-mode: disabled;
+}
+div.form input, div.form textarea, div.form select {
+  margin: 0;
+}
+input, textarea {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+textarea {
+  resize: none; /* Do not allow text area resizable on Firefox. */
+  overflow-y: auto; /* Do not show vertical scroll bar by deafault (when not overflow). */
+}
+input[readonly] {
+  color: #808080 !important;
+}
+.hide { /* element to be hidden */
+  display: none;
+}
+.odd {
+  background-color: #F6F7F8;
+}
+.even {
+  background-color: #FFFFFF;
+}
+.odd:hover, .even:hover, .hover:hover {
+  background-color: #FFFFDD !important;
+}
+.odd.highlight, .even.highlight {
+  background-color: #FFFF00 !important;
+}
+div.form .error {
+  background-color: #FFEEEE;
+  border-color: #CC0000;
+}
+div.form .warning td {
+  background-color: #FF6600;
+}
+.align-center-self {
+  margin-left: auto;
+  margin-right: auto;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+.align-left {
+  text-align: left;
+}
+.bottom-solid {
+  border-bottom: 1px solid black;
+}
+.bottom-dotted {
+  border-bottom: 1px dotted black;
+}
+.border-solid {
+  border: 1px solid black;
+}
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+
+table.grid-view
+{
+  background: white;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px #D0E3EF solid;
+}
+
+table.grid-view th, table.grid-view td
+{
+  border: 1px white solid;
+  padding: 0.3em;
+}
+
+table.grid-view th
+{
+  color: white;
+  background: url("images/grid-view-th.gif") repeat-x scroll left top white;
+  text-align: center;
+}
+
+table.grid-view tr.even
+{
+  background: #F8F8F8;
+}
+
+table.grid-view tr.odd
+{
+  background: #E5F1F4;
+}
+
+table.grid-view tr.selected
+{
+  background: #BCE774;
+}
+
+table.grid-view tr:hover.selected
+{
+  background: #CCFF66;
+}
+.notification {
+  font-weight: bold;
+  color: red;
+  padding: 5px;
+}

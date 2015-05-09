@@ -1,0 +1,10 @@
+.table-wrapper {
+  width: 500px;
+  height: 500px;
+  overflow: scroll;
+}
+.table-wrapper td div {
+  height: 1em;
+  width: 5em;
+  overflow: hidden;
+}
